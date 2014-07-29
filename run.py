@@ -32,7 +32,8 @@ def main():
 
     # Set up logging.
     logger.setLevel(logging.INFO)
-    handler = logging.StreamHandler(open(data_out, 'w'))
+    out = open(data_out, 'w')
+    handler = logging.StreamHandler(out)
     logger.addHandler(handler)
     
     formatter = logging.Formatter(
@@ -48,5 +49,6 @@ def main():
     #         n_visible=28 * 28, n_hidden=args.hidden_size)
 
     logger.info("Starting")
-    
+    logger.info("ENDING")
+    out.close()
     
