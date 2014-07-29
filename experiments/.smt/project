@@ -1,0 +1,41 @@
+{
+  "default_executable": {
+    "path": "/usr/bin/python", 
+    "version": "2.7.4", 
+    "type": "sumatra.programs.PythonExecutable", 
+    "options": "", 
+    "name": "Python"
+  }, 
+  "default_repository": {
+    "url": "/home/srush/Projects/wiki-experiments", 
+    "type": "sumatra.versioncontrol._git.GitRepository", 
+    "upstream": "git@github.com:srush/wiki-experiments.git"
+  }, 
+  "name": "nn", 
+  "input_datastore": {
+    "root": "/", 
+    "type": "sumatra.datastore.filesystem.FileSystemDataStore"
+  }, 
+  "default_launch_mode": {
+    "working_directory": "/home/srush/Projects/wiki-experiments/experiments", 
+    "type": "sumatra.launch.SerialLaunchMode", 
+    "options": null
+  }, 
+  "record_store": {
+    "db_file": "/home/srush/Projects/wiki-experiments/experiments/.smt/records", 
+    "type": "sumatra.recordstore.django_store.DjangoRecordStore"
+  }, 
+  "data_store": {
+    "root": "/home/srush/Projects/wiki-experiments/experiments/Data", 
+    "type": "sumatra.datastore.filesystem.FileSystemDataStore"
+  }, 
+  "on_changed": "error", 
+  "data_label": "cmdline", 
+  "default_main_file": "/home/srush/Projects/wiki-experiments/run.py", 
+  "label_generator": "timestamp", 
+  "_most_recent": "20140729-102759", 
+  "sumatra_version": "0.6.0", 
+  "allow_command_line_parameters": true, 
+  "timestamp_format": "%Y%m%d-%H%M%S", 
+  "description": ""
+}
