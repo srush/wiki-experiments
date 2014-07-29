@@ -1,12 +1,14 @@
 import argparse
 import argparse_config
 import sys
+import os
 
-import dA
+from dA import dA
 import numpy
 from theano.tensor.shared_randomstreams import RandomStreams
 import theano
 import theano.tensor as T
+import logging
 
 def main():
     parser = argparse.ArgumentParser(
@@ -31,6 +33,7 @@ def main():
     print >>sys.stderr, data_out
 
     # Set up logging.
+    logger = logging.getLogger("nn")
     logger.setLevel(logging.INFO)
     handler = logging.StreamHandler(open(data_out, 'w'))
     logger.addHandler(handler)
@@ -39,13 +42,13 @@ def main():
             "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     handler.setFormatter(formatter)
 
-    # rng = numpy.random.RandomState(123)
-    # theano_rng = RandomStreams(rng.randint(2 ** 30))
+    rng = numpy.random.RandomState(123)
+    theano_rng = RandomStreams(rng.randint(2 ** 30))
 
-    # # Start code.
-    # x = T.matrix('x')
-    # da = dA(numpy_rng=rng, theano_rng=theano_rng, input=x,
-    #         n_visible=28 * 28, n_hidden=args.hidden_size)
+    # Start code.
+    x = T.matrix('x')
+    da = dA(numpy_rng=rng, theano_rng=theano_rng, input=x,
+            n_visible=28 * 28, n_hidden=args.hidden_size)
 
     logger.info("Starting")
     logger.info("ENDING")
