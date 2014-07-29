@@ -2,12 +2,18 @@ import argparse
 import argparse_config
 import sys
 
+import dA
+import numpy
+from theano.tensor.shared_randomstreams import RandomStreams
+import theano
+import theano.tensor as T
+
 def main():
     parser = argparse.ArgumentParser(
        description='Run translation experiments.')
 
-    # parser.add_argument('--final_beam', type=int, 
-    #                     help='size of the final beam')
+    parser.add_argument('--hidden_size', type=int, 
+                        help='size of the hidden layer')
     # parser.add_argument('--iterations', type=int, 
     #                     help='iterations of subgrad')
     parser.add_argument('config', type=str)
@@ -32,3 +38,15 @@ def main():
     formatter = logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     handler.setFormatter(formatter)
+
+    rng = numpy.random.RandomState(123)
+    theano_rng = RandomStreams(rng.randint(2 ** 30))
+
+    # Start code.
+    x = T.matrix('x')
+    da = dA(numpy_rng=rng, theano_rng=theano_rng, input=x,
+            n_visible=28 * 28, n_hidden=args.hidden_size)
+
+    logger.info("Starting")
+    
+    
