@@ -39,13 +39,13 @@ def main():
             "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     handler.setFormatter(formatter)
 
-    rng = numpy.random.RandomState(123)
-    theano_rng = RandomStreams(rng.randint(2 ** 30))
+    # rng = numpy.random.RandomState(123)
+    # theano_rng = RandomStreams(rng.randint(2 ** 30))
 
-    # Start code.
-    x = T.matrix('x')
-    da = dA(numpy_rng=rng, theano_rng=theano_rng, input=x,
-            n_visible=28 * 28, n_hidden=args.hidden_size)
+    # # Start code.
+    # x = T.matrix('x')
+    # da = dA(numpy_rng=rng, theano_rng=theano_rng, input=x,
+    #         n_visible=28 * 28, n_hidden=args.hidden_size)
 
     logger.info("Starting")
     
