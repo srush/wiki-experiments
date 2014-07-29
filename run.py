@@ -32,8 +32,7 @@ def main():
 
     # Set up logging.
     logger.setLevel(logging.INFO)
-    out = open(data_out, 'w')
-    handler = logging.StreamHandler(out)
+    handler = logging.StreamHandler(open(data_out, 'w'))
     logger.addHandler(handler)
     
     formatter = logging.Formatter(
@@ -50,5 +49,7 @@ def main():
 
     logger.info("Starting")
     logger.info("ENDING")
-    out.close()
+
+if __name__ == "__main__":
+    main()
     
