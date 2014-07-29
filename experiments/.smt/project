@@ -31,7 +31,7 @@
   }, 
   "on_changed": "error", 
   "data_label": "cmdline", 
-  "default_main_file": "/home/srush/Projects/wiki-experiments/run.py", 
+  "default_main_file": "../run.py", 
   "label_generator": "timestamp", 
   "_most_recent": "20140729-102759", 
   "sumatra_version": "0.6.0", 
