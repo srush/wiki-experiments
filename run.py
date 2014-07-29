@@ -9,6 +9,7 @@ from theano.tensor.shared_randomstreams import RandomStreams
 import theano
 import theano.tensor as T
 import logging
+import train
 
 def main():
     parser = argparse.ArgumentParser(
@@ -16,6 +17,9 @@ def main():
 
     parser.add_argument('--hidden_size', type=int, 
                         help='size of the hidden layer')
+    parser.add_argument('--input', type=str, 
+                        help='input data')
+
     # parser.add_argument('--iterations', type=int, 
     #                     help='iterations of subgrad')
     parser.add_argument('config', type=str)
@@ -46,10 +50,26 @@ def main():
     theano_rng = RandomStreams(rng.randint(2 ** 30))
 
     # Start code.
+    sparse_lines = []
+    columns = 0
+    for l in open(args.input):
+        if not l.strip(): continue
+        sparse_line = map(int, l.split())
+        sparse_lines.append(sparse_line)
+        columns = max(columns, max(sparse_line))
+        if len(sparse_lines) > 10000: break
+ 
+    data = numpy.zeros((len(sparse_lines), columns+1))
+    for i, line in enumerate(sparse_lines):
+        data[i, line] = 1
+
     x = T.matrix('x')
     da = dA(numpy_rng=rng, theano_rng=theano_rng, input=x,
-            n_visible=28 * 28, n_hidden=args.hidden_size)
+            n_visible=columns+1, n_hidden=args.hidden_size)
 
+
+    train_data = theano.shared(data, borrow=True)
+    train.pre_train(da, train_data, logger=logger)
     logger.info("Starting")
     logger.info("ENDING")
 
