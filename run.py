@@ -31,8 +31,9 @@ def main():
 
     args = parser.parse_args()
     print args
-
+    
     output_dir = os.path.join("Data", args.label)
+    os.mkdir(output_dir)
     data_out = os.path.join(output_dir, "mydata.txt")
     print >>sys.stderr, data_out
 
