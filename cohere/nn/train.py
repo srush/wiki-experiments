@@ -6,7 +6,7 @@ import json
 import theano
 import theano.tensor as T
 import time
-
+import numpy
 # from collections import defaultdict
 
 class StructuredMessage(object):
@@ -21,10 +21,10 @@ class StructuredMessage(object):
 
 def pre_train(layer, train_set_x,
               learning_rate=0.1, training_epochs=15, 
-              batch_size=20, logger):
+              batch_size=20, logger=None):
 
     index = T.lscalar()    
-    x = T.matrix('x')
+    x = layer.x
     cost, updates = layer.get_cost_updates(corruption_level=0.3,
                                            learning_rate=learning_rate)
 
@@ -40,7 +40,8 @@ def pre_train(layer, train_set_x,
         for batch_index in xrange(n_train_batches):
             c.append(train_da(batch_index))
         logger.info(StructuredMessage('PRETRAINING', 
-                                      epoch=epoch, mean=mean))
+                                      epoch=epoch, 
+                                      mean=numpy.mean(c)))
 
 
     end_time = time.clock()
